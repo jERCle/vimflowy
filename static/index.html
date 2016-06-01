@@ -14,6 +14,23 @@
     <!-- Cross origin anonymous required for catching error message, since bitballoon serves scripts on different domain -->
     <!-- See: https://www.ravikiranj.net/posts/2014/code/how-fix-cryptic-script-error-javascript/ -->
     <script src="build/app.js" crossOrigin="anonymous"></script>
+    <script src="build/app.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        showMathMenu: false,
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+        },
+        imageFont: null,
+        "HTML-CSS": { availableFonts: ["TeX"] },
+      });
+    </script>
+    <script type="text/javascript" src="js/MathJax/MathJax.js"></script>
 
   </body>
 </html>
+
