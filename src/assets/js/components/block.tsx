@@ -1,19 +1,19 @@
 import React from 'react';
 
-import LineComponent, { LineProps } from './line';
+import LineComponent from './line';
 import Spinner from './spinner';
 
 import Session from '../session';
 import { CachedRowInfo } from '../document';
 import Path from '../path';
 import { CursorsInfoTree } from '../cursor';
-// import { Col } from '../types';
+import { Col, RenderLineOptions } from '../types';
 
 type RowProps = {
   session: Session;
   path: Path;
   cached: CachedRowInfo;
-  onCharClick: ((path: Path, column: number, e: Event) => void) | null;
+  onCharClick: ((path: Path, column: Col, e: Event) => void) | null;
   onClick: ((path: Path) => void) | null;
   style: React.CSSProperties;
   cursorsTree: CursorsInfoTree;
@@ -21,7 +21,7 @@ type RowProps = {
 };
 class RowComponent extends React.Component<RowProps, {}> {
   private onClick: (() => void) | undefined;
-  private onCharClick: ((column: number, e: Event) => void) | null;
+  private onCharClick: ((column: Col, e: Event) => void) | null;
 
   constructor(props: RowProps) {
     super(props);
@@ -41,7 +41,7 @@ class RowComponent extends React.Component<RowProps, {}> {
 
     this.onCharClick = null;
     if (props.onCharClick) {
-      this.onCharClick = (column: number, e: Event) => {
+      this.onCharClick = (column: Col, e: Event) => {
         if (!props.onCharClick) {
           throw new Error('onCharClick disappeared');
         }
@@ -73,7 +73,7 @@ class RowComponent extends React.Component<RowProps, {}> {
     // TODO: React.ReactNode vs React.ReactElement<any>?
     const results: Array<React.ReactNode> = [];
 
-    let lineoptions: LineProps = {
+    let lineoptions: RenderLineOptions = {
       lineData,
       cursors,
       highlights,
@@ -117,7 +117,7 @@ type BlockProps = {
   cached: CachedRowInfo | null;
   cursorsTree: CursorsInfoTree;
   cursorBetween: boolean;
-  onCharClick: ((path: Path, column: number, e: Event) => void) | null;
+  onCharClick: ((path: Path, column: Col, e: Event) => void) | null;
   onLineClick: ((path: Path) => void) | null;
   onBulletClick: ((path: Path) => void) | undefined;
   topLevel: boolean;
